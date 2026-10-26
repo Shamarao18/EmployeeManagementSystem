@@ -1,19 +1,42 @@
+using System;
 
-namespace EmployeeManagementSystem;
-public class Employee
+abstract class Employee : IPayable
 {
-    public int empId{get; private set;}
-    public string empName{get; private set;}="";
-     public string empDept{get; private set;}="";
-     public double Salary{get; private set;}
+    private int id;
+    private string name;
+    private string department;
 
-     public Employee(int Id,string Name,string Dept,double salary)
+    public static int count = 0;
+
+    public Employee(int id, string name, string department)
     {
-        empId = Id;
-        empName = Name ;
-        empDept = Dept ;
-        Salary = salary ;
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        count++;
     }
 
+    public int GetId()
+    {
+        return id;
+    }
 
+    public string GetName()
+    {
+        return name;
+    }
+
+    public string GetDepartment()
+    {
+        return department;
+    }
+
+    public abstract double CalculateSalary();
+
+    public abstract string GetRole();
+
+    public virtual void Display()
+    {
+        Console.WriteLine(id + " | " + name + " | " + department + " | " + GetRole() + " | Salary: " + CalculateSalary());
+    }
 }
